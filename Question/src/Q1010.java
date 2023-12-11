@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Q1010 {
+public class Q1010 {
     public static int[][] combi = new int[30][30];
 
     public static int combination(int m,int n){
