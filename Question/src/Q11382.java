@@ -8,6 +8,6 @@ public class Q11382 {
         long two = sc.nextLong();
         long three = sc.nextLong();
 
-        System.out.println((one+two+three));
+        System.out.println(one+two+three);
     }
 }
