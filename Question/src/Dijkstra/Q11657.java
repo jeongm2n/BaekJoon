@@ -23,6 +23,14 @@ public class Q11657 {
     static int m;
     static final int INF = Integer.MAX_VALUE;
 
+    /* 다익스트라와 벨만포드의 차이
+        - 다익스트라는 방문하지 않은 정점들의 간선 중 최단 경로를 찾음
+        - 벨만포드는 매번 모든 간선을 확인함
+            - 3가지 경우를 확인해야 함
+                1. 간선의 가중치가 모두 양수인 경우
+                2. 간선의 가중치가 음수가 포함되어 있고 순환이 없는 경우
+                3. 간선의 가중치가 음수가 포홤되어 있고 순환이 있는 경우
+    */
     static boolean bellmanford(int start){
         dist[start] = 0;
 
