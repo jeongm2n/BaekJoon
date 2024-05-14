@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class Q15809 {
@@ -18,12 +19,29 @@ public class Q15809 {
         x = find(x);
         y = find(y);
 
+        if(x>y){
+            parent[x]=y;
+            army[y] += army[x];
+            army[x] = 0;
+        }else{
+            parent[y]=x;
+            army[x] += army[y];
+            army[y] = 0;
+        }
+    }
+
+    public static void war(int x, int y){
+        x = find(x);
+        y = find(y);
+
         if(army[x]>army[y]){
             parent[y] = x;
             army[x] -= army[y];
+            army[y] = 0;
         }else if(army[y]>army[x]){
             parent[x] = y;
             army[y] -= army[x];
+            army[x] = 0;
         }else{
             parent[x] = 0;
             parent[y] = 0;
@@ -55,17 +73,9 @@ public class Q15809 {
             int q = Integer.parseInt(st.nextToken());
 
             if(o==1){
-                if(army[p]>army[q]){
-                    army[p] += army[q];
-                    army[q] = 0;
-                    parent[q] = p;
-                }else{
-                    army[q] += army[p];
-                    army[p] = 0;
-                    parent[p] = q;
-                }
+                union(p, q);
             }else{
-                union(p,q);
+                war(p, q);
             }
         }
 
@@ -76,9 +86,13 @@ public class Q15809 {
             if(x>0) arr.add(x);
         }
 
-        sb.append(arr.size()).append("\n");
-        for(int x : arr) sb.append(x + " ");
+        Collections.sort(arr);
 
+        sb.append(arr.size()).append("\n");
+        if(arr.size()!=0){
+            for(int x : arr) sb.append(x + " ");
+        }
+        
         System.out.println(sb);
 
     }
