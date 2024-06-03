@@ -1,4 +1,4 @@
-package MST.Kruskul;
+package MST.Kruskal;
 
 import java.io.BufferedReader;
 import java.io.IOException;
