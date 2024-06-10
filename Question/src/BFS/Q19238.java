@@ -50,7 +50,7 @@ public class Q19238 {
                 int nx = spot[0] + dx[i];
                 int ny = spot[1] + dy[i];
 
-                if(nx>=1 && nx<N && ny>=1 && ny<N && !visited[ny][nx] && graph[ny][nx]!=1){
+                if(nx>=1 && ny>=1 && nx<=N && ny<=N && !visited[ny][nx] && graph[ny][nx]!=1){
                     visited[ny][nx] = true;
                     dist[ny][nx] = dist[spot[1]][spot[0]]+1;
                     q.offer(new int[] {nx, ny});
@@ -60,10 +60,11 @@ public class Q19238 {
     }
 
     static void bfs(int x, int y){
-        Queue<int[]> q = new LinkedList<>();
+        Queue<int[]> q;
         visited = new boolean[N+1][N+1];
 
         while(!pq.isEmpty()){
+            q = new LinkedList<>();
             Person p = pq.poll();
             q.offer(new int[] {p.sx, p.sy, p.w});
             int f = p.w;
@@ -74,7 +75,7 @@ public class Q19238 {
                 if(spot[0]==p.ex && spot[1]==p.ey){
                     f += spot[2];
                     if(f>F){
-                        System.out.println(-1);
+                        F = -1;
                         return;
                     }
                     F = F-f + (f*2);
@@ -89,7 +90,7 @@ public class Q19238 {
                     int nx = spot[0] + dx[i];
                     int ny = spot[1] + dy[i];
 
-                    if(nx>=1 && ny>=1 && nx<N && ny<N && !visited[ny][nx] && graph[ny][nx]!=1){
+                    if(nx>=1 && ny>=1 && nx<=N && ny<=N && !visited[ny][nx] && graph[ny][nx]!=1){
                         visited[ny][nx] = true;
                         q.offer(new int[] {nx, ny, spot[2]+1});
                     }
