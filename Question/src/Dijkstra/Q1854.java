@@ -15,8 +15,7 @@ public class Q1854 {
     }
     static int n;
     static ArrayList<Node>[] graph;
-    //static PriorityQueue<Integer>[] dist;
-    static ArrayList<Integer>[] dist;
+    static PriorityQueue<Integer>[] dist;
 
     static void dijkstra(int k){
         Queue<Node> q = new LinkedList<>();
@@ -30,16 +29,14 @@ public class Q1854 {
                 int d = c.d;
                 int w = c.w;
                 
-                // if(dist[d].size()<k){
-                //     dist[d].add(n.w+w);
-                //     q.offer(new Node(d, n.w+w));
-                // }else if(dist[d].peek()>n.w+w){
-                //     dist[d].poll();
-                //     dist[d].add(n.w+w);
-                //     q.offer(new Node(d, n.w+w));
-                // }
-                dist[d].add(n.w+w);
-                q.offer(new Node(d, n.w+w));
+                if(dist[d].size()<k){
+                    dist[d].add(n.w+w);
+                    q.offer(new Node(d, n.w+w));
+                }else if(dist[d].peek()>n.w+w){
+                    dist[d].poll();
+                    dist[d].add(n.w+w);
+                    q.offer(new Node(d, n.w+w));
+                }
             }
         }
     }
@@ -54,14 +51,12 @@ public class Q1854 {
         int k = Integer.parseInt(st.nextToken());
 
         graph = new ArrayList[n+1];
-        //dist = new PriorityQueue[n+1];
-        dist = new ArrayList[n+1];
+        dist = new PriorityQueue[n+1];
         
 
         for(int i=1; i<=n; i++) {
             graph[i] = new ArrayList<>();
-            //dist[i] = new PriorityQueue<>(Collections.reverseOrder());
-            dist[i] = new ArrayList<>();
+            dist[i] = new PriorityQueue<>(Collections.reverseOrder());
         }
 
         for(int i=0; i<m; i++){
@@ -77,13 +72,11 @@ public class Q1854 {
 
         dijkstra(k);
 
-        for(int i=1; i<=n; i++) Collections.sort(dist[i], (o1,o2)->{return o2-o1;});
         StringBuilder sb = new StringBuilder();
         
         for(int i=1; i<=n; i++){
             if(dist[i].size()<k) sb.append(-1).append("\n");
-            //else sb.append(dist[i].peek()).append("\n");
-            else sb.append(dist[i].get(k-1)).append("\n");
+            else sb.append(dist[i].peek()).append("\n");
         }
 
         System.out.println(sb);
