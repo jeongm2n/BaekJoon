@@ -16,7 +16,7 @@ public class Q14621 {
     }
     static int[] parent;
     static String[] gender;
-    static boolean[] connected;
+    static int edge = 0;
     static ArrayList<Node> list = new ArrayList<>();
     
     static int find(int x){
@@ -43,8 +43,7 @@ public class Q14621 {
             if(gender[u].equals(gender[v])) continue;
             if(find(u)==find(v)) continue;
             union(u, v);
-            connected[u] = true;
-            connected[v] = true;
+            edge++;
             cost += w;
         }
         return cost;
@@ -59,7 +58,6 @@ public class Q14621 {
 
         gender = new String[n+1];
         parent = new int[n+1];
-        connected = new boolean[n+1];
 
         st = new StringTokenizer(br.readLine());
         for(int i=1; i<=n; i++){
@@ -79,9 +77,7 @@ public class Q14621 {
 
         int result = kruskal();
 
-        for(int i=1; i<=n; i++){
-            if(!connected[i]) result = -1;
-        }
+        if(edge!=n-1) result=-1;
 
         System.out.println(result);
     }
