@@ -33,9 +33,7 @@ public class Q13418 {
     }
 
     static int worst(int cnt){
-        Collections.sort(edges, (o1,o2)->{
-            if(o1.dir==o2.dir) return o1.s - o2.s;
-            return o1.dir-o2.dir;});
+        Collections.sort(edges, (o1,o2)->{return o1.dir-o2.dir;});
         for(int i=0; i<=N; i++) parent[i] = i;
         int edge = 0;
         for(Node n : edges){
@@ -53,9 +51,7 @@ public class Q13418 {
     }
 
     static int best(int cnt){
-        Collections.sort(edges, (o1,o2)->{
-            if(o1.dir==o2.dir) return o1.s - o2.s;
-            return o2.dir-o1.dir;});
+        Collections.sort(edges, (o1,o2)->{return o2.dir-o1.dir;});
         for(int i=0; i<=N; i++) parent[i] = i;
         int edge = 0;
 
