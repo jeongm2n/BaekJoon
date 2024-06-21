@@ -15,13 +15,11 @@ public class Q14284 {
     }
 
     static ArrayList<Node>[] graph;
-    static boolean[] visited;
     static int[] dist;
     static final int INF = 100001;
 
     static int djikstra(int s, int t){
         PriorityQueue<Node> q = new PriorityQueue<>((o1,o2)->{return o1.w-o2.w;});
-        visited[s] = true;
         dist[s] = 0;
         q.offer(new Node(s, 0));
 
@@ -31,9 +29,8 @@ public class Q14284 {
             for(Node n : graph[cur.d]){
                 int d = n.d;
                 int w = n.w;
-                if(!visited[d] && dist[d]>dist[cur.d]+w){
+                if(dist[d]>dist[cur.d]+w){
                     dist[d] = dist[cur.d] + w;
-                    visited[d] = true;
                     q.offer(new Node(d, dist[d]));
                 }
             }
@@ -49,7 +46,6 @@ public class Q14284 {
         int m = Integer.parseInt(st.nextToken());
 
         graph = new ArrayList[n+1];
-        visited = new boolean[n+1];
         dist = new int[n+1];
 
         for(int i=1; i<=n; i++) graph[i] = new ArrayList<>();
