@@ -7,17 +7,19 @@ import java.util.*;
 
 public class Q13913 {
     static int[] position = new int[100001];
-    static int[] time = new int[100001];
+    static int time;
+    static boolean[] visited = new boolean[100001];
 
     static void bfs(int s, int k){
         Queue<Integer> q = new LinkedList<>();
         q.offer(s);
-        time[s] = 1;
+        time = 0;
+        visited[s] = true;
 
         while(!q.isEmpty()){
             int cur = q.poll();
 
-            if(s==k) break;
+            if(cur==k) break;
 
             for(int i=0; i<3; i++){
                 int nx = 0;
@@ -25,12 +27,13 @@ public class Q13913 {
                 if(i==1) nx = cur+1;
                 if(i==2) nx = cur*2;
 
-                if(nx>=0 && nx<100000 && time[nx]==0){
+                if(nx>=0 && nx<=100000 && !visited[nx]){
                     q.offer(nx);
-                    time[nx] = time[cur] + 1;
+                    visited[nx] = true;
                     position[nx] = cur;
                 }
             }
+            time++;
         }
     }
 
@@ -57,7 +60,7 @@ public class Q13913 {
                 after = position[after];
             }
             
-            sb.append(s.size()-1).append("\n");
+            sb.append(time).append("\n");
             while(!s.isEmpty()){
                 sb.append(s.pop() + " ");
             }
