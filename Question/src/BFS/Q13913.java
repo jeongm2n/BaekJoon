@@ -9,30 +9,27 @@ public class Q13913 {
     static int[] position = new int[100001];
     static int[] time = new int[100001];
 
-    static void bfs(int n, int k){
+    static void bfs(int s, int k){
         Queue<Integer> q = new LinkedList<>();
-        q.offer(n);
-        time[n] = 1;
+        q.offer(s);
+        time[s] = 1;
 
         while(!q.isEmpty()){
-            int s = q.poll();
+            int cur = q.poll();
 
             if(s==k) break;
 
-            if(s-1>=0 && time[s-1]==0){
-                q.offer(s-1);
-                position[s-1] = s;
-                time[s-1] = time[s]+1;
-            }
-            if(s+1<=100000 && time[s+1]==0){
-                q.offer(s+1);
-                position[s+1] = s;
-                time[s+1] = time[s]+1;
-            }
-            if(s*2<=100000 && time[s*2]==0){
-                q.offer(s*2);
-                position[s*2] = s;
-                time[s*2] = time[s*2]+1;
+            for(int i=0; i<3; i++){
+                int nx = 0;
+                if(i==0) nx = cur-1;
+                if(i==1) nx = cur+1;
+                if(i==2) nx = cur*2;
+
+                if(nx>=0 && nx<100000 && time[nx]==0){
+                    q.offer(nx);
+                    time[nx] = time[cur] + 1;
+                    position[nx] = cur;
+                }
             }
         }
     }
@@ -64,8 +61,7 @@ public class Q13913 {
             while(!s.isEmpty()){
                 sb.append(s.pop() + " ");
             }
-
-            System.out.println(sb);
         }
+        System.out.println(sb);
     }
 }
