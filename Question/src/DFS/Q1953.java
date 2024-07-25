@@ -39,7 +39,6 @@ public class Q1953 {
             for(int j=0; j<k; j++){
                 int v = Integer.parseInt(st.nextToken());
                 graph[i].add(v);
-                graph[v].add(i);
             }
         }
 
