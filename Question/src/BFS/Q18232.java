@@ -41,7 +41,7 @@ public class Q18232 {
             }
         }
 
-        return -1;
+        return 0;
     }
 
     static boolean range(int x){
