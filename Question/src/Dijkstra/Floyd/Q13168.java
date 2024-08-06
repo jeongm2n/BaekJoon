@@ -12,7 +12,7 @@ public class Q13168 {
     static int[][] non_dist; //내일로 안샀을 때
     static final int INF = 10000001;
 
-    static int vehicle(String s, int c){
+    static int vehicle(String s, int c){ //내일로 티켓을 샀을 때 할인율 계산을 위한 함수
         if(s.equals("ITX-Saemaeul") || s.equals("ITX-Cheongchun") || s.equals("Mugunghwa")) return 0;
         if(s.equals("S-Train") || s.equals("V-Train")) return 1;
         return 2;
@@ -56,9 +56,9 @@ public class Q13168 {
         }
 
         int M = Integer.parseInt(br.readLine());
-        String[] plan = new String[M+1]; 
+        String[] plan = new String[M]; 
         st = new StringTokenizer(br.readLine());
-        for(int i=1; i<=M; i++) plan[i] = st.nextToken();
+        for(int i=0; i<M; i++) plan[i] = st.nextToken();
 
         int K = Integer.parseInt(br.readLine());
         for(int i=0; i<K; i++){
@@ -70,6 +70,7 @@ public class Q13168 {
 
             non_dist[map.get(a)][map.get(b)] = non_dist[map.get(b)][map.get(a)] = Math.min(non_dist[map.get(a)][map.get(b)], m*2);
             dist[map.get(a)][map.get(b)] = dist[map.get(b)][map.get(a)] = Math.min(dist[map.get(a)][map.get(b)], m*vehicle(tran, m));
+            //소수점이나 홀수일 수도 있어서 애초에 모든 가격에 2배를 해놓고 시작
         }
 
         floyd();
@@ -78,8 +79,8 @@ public class Q13168 {
         int non_sum = 0;
 
         for(int i=1; i<M; i++){
-            int a = map.get(plan[i]);
-            int b = map.get(plan[i+1]);
+            int a = map.get(plan[i-1]);
+            int b = map.get(plan[i]);
 
             sum += dist[a][b];
             non_sum += non_dist[a][b];
