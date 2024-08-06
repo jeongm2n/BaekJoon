@@ -10,7 +10,7 @@ public class Q13168 {
     static int cost, N;
     static int[][] dist; //내일로 샀을 때
     static int[][] non_dist; //내일로 안샀을 때
-    static final int INF = Integer.MAX_VALUE;
+    static final int INF = 10000001;
 
     static int vehicle(String s, int c){
         if(s.equals("ITX-Saemaeul") || s.equals("ITX-Cheongchun") || s.equals("Mugunghwa")) return 0;
@@ -74,8 +74,8 @@ public class Q13168 {
 
         floyd();
 
-        int sum = 0; 
-        int non_sum = cost*2;
+        int sum = cost*2; 
+        int non_sum = 0;
 
         for(int i=1; i<M; i++){
             int a = map.get(plan[i]);
