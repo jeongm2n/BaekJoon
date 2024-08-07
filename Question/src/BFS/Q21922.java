@@ -34,7 +34,7 @@ public class Q21922 {
             if(graph[ny][nx]==2 && (dir==0 || dir==1)) break;
             
             if(graph[ny][nx]==3){
-                if(dir==0) dir=2;
+                if(dir==0) dir=3;
                 if(dir==2) dir=1;
                 if(dir==1) dir=2;
                 if(dir==3) dir=0;
@@ -46,7 +46,7 @@ public class Q21922 {
                 if(dir==3) dir=1;  
             }
             
-            if(dir==0) ny += 1;
+            if(dir==0) ny -= 1;
             if(dir==1) ny += 1;
             if(dir==2) nx -= 1;
             if(dir==3) nx += 1;
