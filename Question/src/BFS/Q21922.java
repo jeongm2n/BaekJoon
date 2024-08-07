@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Q21922 {
     static class Node{
-        int x, y, w, dir;
+        int x, y, dir;
         public Node(int x, int y, int dir){
             this.x = x;
             this.y = y;
