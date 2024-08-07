@@ -26,33 +26,32 @@ public class Q21922 {
         while(!q.isEmpty()){
             Node cur = q.poll();
             
-            int x = cur.x, y = cur.y, dir = cur.dir;
-            if(!visited[y][x]) cnt++; 
-            visited[y][x] = true;
+            int nx = cur.x, ny = cur.y, dir = cur.dir;
+            if(!visited[ny][nx]) cnt++; 
+            visited[ny][nx] = true;
 
-            if(graph[y][x]==1 && (dir==2 || dir==3)) break;
-            if(graph[y][x]==2 && (dir==0 || dir==1)) break;
+            if(graph[ny][nx]==1 && (dir==2 || dir==3)) break;
+            if(graph[ny][nx]==2 && (dir==0 || dir==1)) break;
             
-            if(graph[y][x]==3){
+            if(graph[ny][nx]==3){
                 if(dir==0) dir=2;
                 if(dir==2) dir=1;
                 if(dir==1) dir=2;
                 if(dir==3) dir=0;
             }
-            else if(graph[y][x]==4){
+            if(graph[ny][nx]==4){
                 if(dir==0) dir=2;
                 if(dir==1) dir=3;
                 if(dir==2) dir=0;
                 if(dir==3) dir=1;  
             }
             
-            int nx=0, ny=0;
-            if(dir==0) ny = y+1;
-            if(dir==1) ny = y+1;
-            if(dir==2) nx = x-1;
-            if(dir==3) nx = x+1;
+            if(dir==0) ny += 1;
+            if(dir==1) ny += 1;
+            if(dir==2) nx -= 1;
+            if(dir==3) nx += 1;
 
-            if(nx<0 || ny<0 || nx>=M || ny>=N) break;
+            if(nx<0 || ny<0 || nx>=M || ny>=N) return cnt;
 
             q.offer(new Node(nx, ny, dir));
         }
