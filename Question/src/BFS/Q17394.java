@@ -67,6 +67,7 @@ public class Q17394 {
             A = Integer.parseInt(st.nextToken());
             B = Integer.parseInt(st.nextToken());
 
+  
             sb.append(bfs()).append("\n");
         }
 
