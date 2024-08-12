@@ -19,7 +19,7 @@ public class Q12834 {
     static ArrayList<Node>[] graph;
     static final int INF = 100000001;
 
-    static int bfs(int s){
+    static int dijkstra(int s){
         PriorityQueue<Node> q = new PriorityQueue<>((o1,o2)->{return o1.w-o2.w;});
         dist = new int[V+1];
 
@@ -79,7 +79,7 @@ public class Q12834 {
         int sum = 0;
 
         for(int i=0; i<N; i++){
-            sum += bfs(home[i]);
+            sum += dijkstra(home[i]);
         }
 
         System.out.println(sum);
