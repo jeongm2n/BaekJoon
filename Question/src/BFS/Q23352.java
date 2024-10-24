@@ -13,18 +13,16 @@ public class Q23352 {
         }
     }
 
-    static int N, M, s;
+    static int N, M, s, result = 0, route = 0;
     static int[][] graph;
     static boolean[][] visited;
     static int[] dx = {0,0,-1,1};
     static int[] dy = {-1,1,0,0};
-    static int result = 0;
 
     static void bfs(int sx, int sy){
         Queue<Node> q = new LinkedList<>();
         
         q.add(new Node(sx, sy, 0));
-        int route = 0;
 
         while(!q.isEmpty()){       
             Node Node = q.remove();
@@ -63,7 +61,6 @@ public class Q23352 {
         M = Integer.parseInt(st.nextToken());
 
         graph = new int[N][M];
-        visited = new boolean[N][M];
 
         for(int i=0; i<N; i++){
             st = new StringTokenizer(br.readLine());
