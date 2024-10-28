@@ -46,7 +46,7 @@ public class Q14461 {
                 int nx = x+dx[i];
                 int ny = y+dy[i];
 
-                if(nx<0 || nx>=N || ny<0 || ny>=N || visited[ny][nx][m]) continue;
+                if(nx<0 || nx>=N || ny<0 || ny>=N || visited[ny][nx][(m+1)%3]) continue;
                 if(m==2) pq.offer(new Node(nx, ny, 0, w + graph[ny][nx] + T));
                 else pq.offer(new Node(nx, ny, m+1, w + T));
             }
