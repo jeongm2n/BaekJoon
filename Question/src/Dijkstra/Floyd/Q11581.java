@@ -8,8 +8,7 @@ public class Q11581 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));        
         int N = Integer.parseInt(br.readLine());        
         boolean[][] arr = new boolean[N + 1][N + 1];    
-
-        // 데이터 초boolean[] 기화    boolean[]     
+            
         for (int i = 1; i < N; i++) {            
             int e = Integer.parseInt(br.readLine());            
             StringTokenizer st = new StringTokenizer(br.readLine());             
