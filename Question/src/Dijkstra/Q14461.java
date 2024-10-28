@@ -25,7 +25,6 @@ public class Q14461 {
             return o1.w-o2.w;
         });
 
-        visited[0][0][0] = true;
         pq.offer(new Node(0,0,0,0));
 
         while(!pq.isEmpty()){
