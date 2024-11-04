@@ -9,68 +9,59 @@ public class Q22944 {
     static int[][] graph;
     static int N, H, D, sx, sy, ex, ey;
     //빈칸 = 0, 우산 = 1;
-    static boolean[][][] visited; //우산 없을 때 0, 있을 때 1
+    static int[][] visited; //우산 없을 때 0, 있을 때 1
 
     static class Node{
-        int x, y, h, u, d, w;
+        int x, y, h, cost, w;
 
-        public Node(int x, int y, int h, int u, int d, int w){
+        public Node(int x, int y, int h, int cost, int w){
             this.x = x;
             this.y = y;
             this.h = h;
-            this.u = u;
-            this.d = d;
+            this.cost = cost;
             this.w = w;
         }
     }
 
     static int bfs(){
         Queue<Node> q = new LinkedList<>();
-        q.offer(new Node(sx, sy, H, 0, 0, 0));
-        visited[sy][sx][0] = true;
+        q.offer(new Node(sx, sy, H, 0, 0));
+        visited[sy][sx] = H;
+
+        int min = Integer.MAX_VALUE;
 
         while(!q.isEmpty()){
             Node cur = q.poll();
-            int h = cur.h;
-            int d = cur.d;
-            int u = cur.u;
-            int w = cur.w;
-
-            if(cur.x==ex && cur.y==ey) return w;
 
             for(int i=0; i<4; i++){
+                int h = cur.h;
+                int cost = cur.cost;
+                int w = cur.w;
                 int nx = dx[i] + cur.x;
                 int ny = dy[i] + cur.y;
 
-                if(nx<0 || ny<0 || nx>=N || ny>=N || visited[ny][nx][u]) continue;
-                if(h==0) return -1;
+                if(nx<0 || ny<0 || nx>=N || ny>=N) continue;
 
-                if(u==0){
-                    if(graph[ny][nx]==0){
-                        q.offer(new Node(nx, ny, h-1, 0, 0, w+1));
-                        visited[ny][nx][0] = true;
-                    }else{
-                        q.offer(new Node(nx, ny, h, 1, D, w+1));
-                        visited[ny][nx][1] = true;
-                    }
-                }else{
-                    if(graph[ny][nx]==0){
-                        if(d-1==0){
-                            q.offer(new Node(nx, ny, h, 0, 0, w+1));
-                            visited[ny][nx][0] = true;
-                        }else{
-                            q.offer(new Node(nx, ny, h, 1, d-1, w+1));
-                            visited[ny][nx][1] = true;
-                        }
-                    }else{
-                        q.offer(new Node(nx, ny, h, 1, D, w+1));
-                        visited[ny][nx][1] = true;
-                    }
+                if(nx==ex && ny==ey){
+                    min = Math.min(min, w+1);
+                    continue;
+                }
+
+                if(graph[ny][nx]==1) cost = D;
+                
+                if(cost!=0) cost--;
+                else h--;
+
+                if(h==0) continue;
+
+                if(visited[ny][nx] < h+cost){
+                    visited[ny][nx] = h+cost;
+                    q.offer(new Node(nx, ny, h, cost, w+1));
                 }
             }
         }
 
-        return -1;
+        return min;
     }
 
     public static void main(String[] args) throws IOException {
@@ -82,7 +73,7 @@ public class Q22944 {
         D = Integer.parseInt(st.nextToken());
 
         graph = new int[N][N];
-        visited = new boolean[N][N][2];
+        visited = new int[N][N];
 
         for(int i=0; i<N; i++){
             String s = br.readLine();
@@ -103,6 +94,7 @@ public class Q22944 {
             }
         }
 
-        System.out.println(bfs());
+        int result = bfs();
+        System.out.println(result==Integer.MAX_VALUE ? -1 : result);
     }
 }
