@@ -6,7 +6,7 @@ import java.util.*;
 public class Q23743 {
     static int[] parent;
     static int N, M;
-    static ArrayList<Edge> edges;
+    static ArrayList<Edge> edges = new ArrayList<>();
 
     static class Edge{
         int s, e, w;
