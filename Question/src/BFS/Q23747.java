@@ -12,7 +12,7 @@ public class Q23747 {
 
     static void bfs(int hr, int hc) {
 		Queue<int[]> q = new LinkedList<>();
-		q.add(new int[] {hr, hc});
+		q.add(new int[] {hc, hr});
 		visited[hr][hc] = true;
 		
 		while(!q.isEmpty()) {
@@ -57,17 +57,11 @@ public class Q23747 {
 		String str = br.readLine();
 
 		for(int i=0; i<str.length(); i++) {
-			if(str.charAt(i)=='W') {
-				bfs(hr, hc);
-			}else if(str.charAt(i)=='U') {
-				hr-=1;
-			}else if(str.charAt(i)=='D') {
-				hr+=1;
-			}else if(str.charAt(i)=='L') {
-				hc-=1;
-			}else if(str.charAt(i)=='R') {
-				hc+=1;
-			}
+			if(str.charAt(i)=='W') bfs(hr, hc);
+			else if(str.charAt(i)=='U') hr-=1;
+			else if(str.charAt(i)=='D') hr+=1;
+			else if(str.charAt(i)=='L') hc-=1;
+			else if(str.charAt(i)=='R') hc+=1;
 		}
 		
 		visited[hr][hc] = true;
@@ -84,11 +78,8 @@ public class Q23747 {
 
 		for(int i=0; i<r; i++) {
 			for(int j=0; j<c; j++) {
-				if(visited[i][j]) {
-					sb.append(".");
-				}else {
-					sb.append("#");
-				}
+				if(visited[i][j]) sb.append(".");
+				else sb.append("#");
 			}
 			sb.append("\n");
 		}
