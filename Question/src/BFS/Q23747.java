@@ -23,8 +23,8 @@ public class Q23747 {
 				int ny = data[1]+dy[i];
                 
 				if(nx>=0 && nx<c && ny>=0 && ny<r && !visited[ny][nx]) {
-					if(graph[data[0]][data[1]] == graph[ny][nx]) {
-						visited[ny][nx]=true;
+					if(graph[data[1]][data[0]] == graph[ny][nx]) {
+						visited[ny][nx] = true;
 						q.add(new int[] {nx, ny});
 					}
 				}
@@ -44,7 +44,7 @@ public class Q23747 {
 		visited = new boolean[r][c];
 
 		for(int i=0; i<r; i++) {
-			String str=br.readLine();
+			String str = br.readLine();
 			for(int j=0; j<c; j++) {
 				graph[i][j]=str.charAt(j);
 			}
