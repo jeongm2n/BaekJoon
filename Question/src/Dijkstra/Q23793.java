@@ -14,12 +14,14 @@ public class Q23793 {
 
     static int N, M, X, Y, Z;
     static ArrayList<Node>[] graph;
-    static int[] dist;
-    static boolean[] visited;
     static final int INF = Integer.MAX_VALUE;
 
     static int dijkstra(int s, int e, int ver){
+        int[] dist = new int[N+1];
+        boolean[] visited = new boolean[N+1];
+        Arrays.fill(dist, INF);
         PriorityQueue<Node> q = new PriorityQueue<>((o1,o2)->{return o1.w-o2.w;});
+
         visited[s] = true;
         dist[s] = 0;
         q.offer(new Node(s, 0));
@@ -50,15 +52,12 @@ public class Q23793 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
         graph = new ArrayList[N+1];
-        dist = new int[N+1];
-        visited = new boolean[N+1];
-
+        
         for(int i=1; i<=N; i++) graph[i] = new ArrayList<>();
-        Arrays.fill(dist, INF);
 
         for(int i=0; i<M; i++){
             st = new StringTokenizer(br.readLine());
