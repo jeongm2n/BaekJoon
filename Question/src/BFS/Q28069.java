@@ -10,15 +10,11 @@ public class Q28069 {
     static boolean bfs(){
         Queue<Integer> q = new LinkedList<>();
         q.offer(0);
-        boolean result = false;
 
         while(!q.isEmpty()){
             int cur = q.poll();
 
-            if(dp[cur]==K && cur==N){
-                result = true;
-                break;
-            }
+            if(dp[cur]==K && cur==N) return true;
 
             for(int i=0; i<2; i++){
                 int nn = 0;
@@ -31,7 +27,7 @@ public class Q28069 {
             }
         }
 
-        return result;
+        return false;
     }
 
     public static void main(String[] args) throws IOException {
