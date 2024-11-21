@@ -4,35 +4,30 @@ import java.io.*;
 import java.util.*;
 
 public class Q28069 {
-    static class Node{
-        int n, w;
-        public Node(int n, int w){
-            this.n = n;
-            this.w = w;
-        }
-    }
     static int N, K;
+    static int[] dp;
 
     static boolean bfs(){
-        Queue<Node> q = new LinkedList<>();
-        q.offer(new Node(0, 0));
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(0);
         boolean result = false;
 
         while(!q.isEmpty()){
-            Node cur = q.poll();
+            int cur = q.poll();
 
-            if(cur.w==K && cur.n==N){
+            if(dp[cur]==K && cur==N){
                 result = true;
                 break;
             }
 
             for(int i=0; i<2; i++){
                 int nn = 0;
-                if(i==0) nn = cur.n+1;
-                else if(i==1) nn = cur.n + (cur.n/2);
+                if(i==0) nn = cur+1;
+                else if(i==1) nn = cur + (cur/2);
 
-                if(nn>N) continue;
-                q.offer(new Node(nn, cur.w+1));
+                if(nn>N || dp[nn]!=0) continue;
+                q.offer(nn);
+                dp[nn] = dp[cur] + 1;
             }
         }
 
@@ -45,7 +40,9 @@ public class Q28069 {
 
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
-    
+        
+        dp = new int[N+1];
+
         System.out.println(!bfs() ? "water" : "minigimbob");
     }
 }
