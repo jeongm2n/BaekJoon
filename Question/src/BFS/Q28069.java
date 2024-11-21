@@ -15,6 +15,7 @@ public class Q28069 {
             int cur = q.poll();
 
             if(dp[cur]==K && cur==N) return true;
+            if(dp[cur] == K) continue;
 
             for(int i=0; i<2; i++){
                 int nn = 0;
