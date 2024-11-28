@@ -29,14 +29,15 @@ public class Q11964 {
 
             result = Math.max(w, result);
 
-            if(w+A<=T && !visited[w][water]){
+            if(w+A<=T && !visited[w+A][water]){
                 q.offer(new Stat(w+A, water));
                 visited[w+A][water] = true;
             }
-            if(w+B<=T && !visited[w][water]){
+            if(w+B<=T && !visited[w+B][water]){
                 q.offer(new Stat(w+B, water));
                 visited[w+B][water] = true;
             } 
+
             int ww = (int)Math.round((double)(w/2));
             if(water==0 && !visited[ww][1]){
                 q.offer(new Stat(ww, 1));
