@@ -70,7 +70,7 @@ public class Q17490 {
             System.out.println("YES");
             return;
         }
-        int result = 0;
+        long result = 0;
 
         for(Edge l : edges){
             if(find(l.s)==find(l.e)) continue;
