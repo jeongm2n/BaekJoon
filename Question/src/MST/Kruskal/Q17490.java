@@ -15,7 +15,8 @@ public class Q17490 {
 
     static int[] parent;
     static ArrayList<Edge> edges = new ArrayList<>();
-    static int N, M, K;
+    static int N, M;
+    static long K;
 
     static int find(int x){
         if(x==parent[x]) return x;
@@ -36,7 +37,7 @@ public class Q17490 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
+        K = Long.parseLong(st.nextToken());
         
         parent = new int[N+1];
         for(int i=1; i<=N; i++) parent[i] = i-1;
