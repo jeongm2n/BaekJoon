@@ -19,12 +19,15 @@ public class Q11964 {
         Queue<Stat> q = new LinkedList<>();
         q.offer(new Stat(0, 0));
         visited[0][0] = true;
+        int result = Integer.MIN_VALUE;
 
         while(!q.isEmpty()){
             Stat cur = q.poll();
 
             int w = cur.w;
             int water = cur.water;
+
+            result = Math.max(w, result);
 
             if(w+A<=T && !visited[w][water]){
                 q.offer(new Stat(w+A, water));
@@ -34,7 +37,14 @@ public class Q11964 {
                 q.offer(new Stat(w+B, water));
                 visited[w+B][water] = true;
             } 
+            int ww = (int)Math.round((double)(w/2));
+            if(water==0 && !visited[ww][1]){
+                q.offer(new Stat(ww, 1));
+                visited[ww][1] = true;
+            }
         }
+
+        return result;
     }
 
     public static void main(String[] args) throws IOException {
@@ -47,5 +57,6 @@ public class Q11964 {
 
         visited = new boolean[5000001][2];
 
+        System.out.println(bfs());
     }
 }
