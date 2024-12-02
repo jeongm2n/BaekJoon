@@ -16,10 +16,19 @@ public class Q20005 {
             this.p = p;
         }
     }
+
+    static class Player{
+        int num, dps;
+        public Player(int num, int dps){
+            this.num = num;
+            this.dps = dps;
+        }
+    }
+
     static int[] dx = {0,0,-1,1};
     static int[] dy = {-1,1,0,0};
     static Queue<Node> q = new LinkedList<>();
-    static HashMap<Character, Integer> hm = new HashMap<>();
+    static HashMap<Character, Player> hm = new HashMap<>();
 
     static int bfs(){
         ArrayList<Character> arr = new ArrayList<>();
@@ -37,13 +46,14 @@ public class Q20005 {
                     int nx = cur.x + dx[i];
                     int ny = cur.y + dy[i];
 
-                    if(nx<0 || ny<0 || nx>=N || ny>=M || graph[ny][nx]=='X') continue;
+                    if(nx<0 || ny<0 || nx>=N || ny>=M || graph[ny][nx]=='X' || visited[ny][nx][hm.get(cur.p).num]) continue;
+                    visited[ny][nx][hm.get(cur.p).num] = true;
                     q.offer(new Node(nx, ny, cur.p));
                 }
             }
             
             for(char p : arr){
-                HP -= hm.get(p);
+                HP -= hm.get(p).dps;
             }
         }
 
@@ -59,7 +69,7 @@ public class Q20005 {
         P = Integer.parseInt(st.nextToken());
 
         graph = new char[M][N];
-        visited = new boolean[M][N][P];
+        visited = new boolean[M][N][P+1];
 
         for(int i=0; i<M; i++){
             String s = br.readLine();
@@ -69,11 +79,11 @@ public class Q20005 {
             }
         }
 
-        for(int i=0; i<P; i++){
+        for(int i=1; i<=P; i++){
             st = new StringTokenizer(br.readLine());
             char p = st.nextToken().charAt(0);
             int dps = Integer.parseInt(st.nextToken());
-            hm.put(p, dps);
+            hm.put(p, new Player(i, dps));
         }
 
         HP = Integer.parseInt(br.readLine());
