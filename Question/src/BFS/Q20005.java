@@ -34,9 +34,11 @@ public class Q20005 {
         ArrayList<Character> arr = new ArrayList<>();
 
         while(HP>0){
-            while(!q.isEmpty()){
+            int size = q.size();
+            while(size>0){
                 Node cur = q.poll();
-
+                size--;
+                
                 if(graph[cur.y][cur.x]=='B' && !arr.contains(cur.p)){
                     arr.add(cur.p);
                     continue;
