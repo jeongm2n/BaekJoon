@@ -7,8 +7,8 @@ public class Q19952 {
     static int T, H, W, O, F;
     static int[][] graph;
     static boolean[][] visited;
-    static int[] dx = {0,0,-1,1};
-    static int[] dy = {-1,1,0,0};
+    static int[] dy = {0,0,-1,1};
+    static int[] dx = {-1,1,0,0};
 
     static class Node{
         int x, y, hp;
@@ -22,7 +22,7 @@ public class Q19952 {
     static String bfs(int sx, int sy, int ex, int ey){
         Queue<Node> q = new LinkedList<>();
         q.offer(new Node(sx, sy, F));
-        visited[sy][sx] = true;
+        visited[sx][sy] = true;
 
         while(!q.isEmpty()){
             Node cur = q.poll();
@@ -37,17 +37,11 @@ public class Q19952 {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
-                if(nx>0 && ny>0 && nx<=W && ny<=H && !visited[ny][nx]){
-                    if(graph[ny][nx]<=graph[y][x]){
-                        q.offer(new Node(nx, ny, hp-1));
-                        visited[ny][nx] = true;
-                    }else{
-                        if(hp>=graph[ny][nx]-graph[y][x]){
-                            q.offer(new Node(nx, ny, hp-1));
-                            visited[ny][nx] = true;
-                        }
-                    }
-                } 
+                if(nx<1 || ny<1 || nx>H || ny>W || visited[nx][ny]) continue;
+                if(hp <= graph[nx][ny]-graph[x][y]) continue;
+                
+                q.offer(new Node(nx, ny, hp-1));
+                visited[nx][ny] = true;
             }
         }
         return "인성 문제있어??";
@@ -81,7 +75,7 @@ public class Q19952 {
                 int y = Integer.parseInt(st.nextToken());
                 int l = Integer.parseInt(st.nextToken());
 
-                graph[y][x] = l;
+                graph[x][y] = l;
             }
 
             sb.append(bfs(sx, sy, ex, ey)).append("\n");
