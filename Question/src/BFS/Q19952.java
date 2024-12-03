@@ -31,22 +31,23 @@ public class Q19952 {
             int hp = cur.hp;
 
             if(x==ex && y==ey) return "잘했어!!";
+            if(hp<=0) break;
 
             for(int i=0; i<4; i++){
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
-                if(nx<1 || ny<1 || nx>W || ny>H || visited[ny][nx]) continue;
-
-                if(graph[ny][nx]<=graph[y][x]){
-                    q.offer(new Node(nx, ny, hp-1));
-                    visited[ny][nx] = true;
-                }else{
-                    if(hp>=graph[ny][nx]-graph[y][x]){
+                if(nx>0 && ny>0 && nx<=W && ny<=H && !visited[ny][nx]){
+                    if(graph[ny][nx]<=graph[y][x]){
                         q.offer(new Node(nx, ny, hp-1));
                         visited[ny][nx] = true;
+                    }else{
+                        if(hp>=graph[ny][nx]-graph[y][x]){
+                            q.offer(new Node(nx, ny, hp-1));
+                            visited[ny][nx] = true;
+                        }
                     }
-                }
+                } 
             }
         }
         return "인성 문제있어??";
