@@ -31,7 +31,7 @@ public class Q19952 {
             int hp = cur.hp;
 
             if(x==ex && y==ey) return "잘했어!!";
-            if(hp<=0) break;
+            if(hp<=0) continue;
 
             for(int i=0; i<4; i++){
                 int nx = x + dx[i];
