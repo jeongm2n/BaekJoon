@@ -1,25 +1,19 @@
-package BFS;
+package DFS;
 
 import java.io.*;
 import java.util.*;
 
 public class Q17220 {
-    static int N, M;
+    static int N, M, answer=0;
     static boolean[] visited;
     static ArrayList<Integer>[] graph;
 
-    static void bfs(int s){
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(s);
-        visited[s] = true;
-
-        while(!q.isEmpty()){
-            int cur = q.poll();
-
-            for(int v : graph[cur]){
+    static void dfs(int s){
+        if(!visited[s]){
+            for(int v : graph[s]){
                 if(!visited[v]){
-                    q.offer(v);
-                    visited[v] = true;
+                    answer++;
+                    dfs(v);
                 }
             }
         }
@@ -36,7 +30,6 @@ public class Q17220 {
         for(int i=0; i<N; i++) graph[i] = new ArrayList<>();
 
         int[] head = new int[N];
-        ArrayList<Integer> headList = new ArrayList<>();
 
         for(int i=0; i<M; i++){
             st = new StringTokenizer(br.readLine());
@@ -46,19 +39,14 @@ public class Q17220 {
             head[v]++;
         }
 
-        for(int i=0; i<N; i++){
-            if(head[i]==0) headList.add(i);
-        }
-
         st = new StringTokenizer(br.readLine());
         int S = Integer.parseInt(st.nextToken());
-        for(int i=0; i<S; i++) bfs(st.nextToken().charAt(0)-'A');
+        for(int i=0; i<S; i++) visited[st.nextToken().charAt(0)-'A'] = true;
 
-        int answer = 0;
         for(int i=0; i<N; i++){
-            if(!visited[i]) answer++;
+            if(head[i]==0) dfs(i);
         }
 
-        System.out.println(answer-headList.size());
+        System.out.println(answer);
     }
 }
