@@ -14,10 +14,12 @@ public class Q27440 {
     }
 
     static long N;
+    static HashSet<Long> visited;
 
     static int bfs(){
         Queue<Node> q = new LinkedList<>();
         q.offer(new Node(N,0));
+        visited.add(N);
         int result = 0;
 
         while(!q.isEmpty()){
@@ -30,9 +32,18 @@ public class Q27440 {
                 break;
             }
 
-            if(val%3==0) q.offer(new Node(val/3, w+1));
-            if(val%2==0) q.offer(new Node(val/2, w+1));
-            q.offer(new Node(val-1, w+1));
+            if(val%3==0 && !visited.contains(val/3)){
+                q.offer(new Node(val/3, w+1));
+                visited.add(val/3);
+            }
+            if(val%2==0 && !visited.contains(val/2)){
+                q.offer(new Node(val/2, w+1));
+                visited.add(val/2);
+            }
+            if(!visited.contains(val-1)){
+                q.offer(new Node(val-1, w+1));
+                visited.add(val-1);
+            }
         }
 
         return result;
@@ -41,6 +52,7 @@ public class Q27440 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Long.parseLong(br.readLine());
+        visited = new HashSet<>();
 
         if(N==1) System.out.println(0);
         else System.out.println(bfs());
