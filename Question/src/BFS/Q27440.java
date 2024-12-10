@@ -54,7 +54,7 @@ public class Q27440 {
         N = Long.parseLong(br.readLine());
         visited = new HashSet<>();
 
-        if(N==1) System.out.println(0);
-        else System.out.println(bfs());
+        //if(N==1) System.out.println(0);
+        System.out.println(bfs());
     }   
 }
