@@ -6,9 +6,8 @@ import java.util.*;
 public class Q14615 {
     static ArrayList<Integer>[] graph;
     static boolean[] visited;
-    static int result;
 
-    static int bfs(int s, int e){
+    static boolean bfs(int s, int e){
         Queue<Integer> q = new LinkedList<>();
         q.offer(s);
         visited[s] = true;
@@ -18,14 +17,14 @@ public class Q14615 {
 
             for(int v : graph[cur]){
                 if(visited[v]) continue;
-                if(v==e) return 1;    
+                if(v==e) return true;    
                 else{
                     visited[v] = true;
                     q.offer(v);
                 }
             }
         }
-        return -1;
+        return false;
     }
 
     public static void main(String[] args) throws IOException {
@@ -52,11 +51,11 @@ public class Q14615 {
         for(int i=0; i<T; i++){
             int C = Integer.parseInt(br.readLine());
             visited = new boolean[N+1];
-            int result1 = bfs(1, C);
+            boolean result1 = bfs(1, C);
             visited = new boolean[N+1];
-            int result2 = bfs(C, N);
+            boolean result2 = bfs(C, N);
             
-            sb.append((result1+result2)<=0 ? "Destroyed the CTP" : "Defend the CTP").append("\n");
+            sb.append(result1&&result2 ? "Defend the CTP" : "Destroyed the CTP").append("\n");
         }
 
         System.out.println(sb);
