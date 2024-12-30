@@ -5,37 +5,64 @@ import java.util.*;
 
 public class Q14615 {
     static ArrayList<Integer>[] graph;
-    static boolean[] visited;
+    static ArrayList<Integer>[] regraph;
+    static boolean[][] visited;
+    static int N, M, C;
 
-    static boolean bfs(int s, int e){
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(s);
-        visited[s] = true;
+    static class Node{
+        int v;
+        boolean f;
+        public Node(int v, boolean f){
+            this.v = v;
+            this.f = f;
+        }
+    }
+
+    static void bfs(){
+        Queue<Node> q = new LinkedList<>();
+        visited[0][1] = true;
+        visited[1][N] = true;
+        q.offer(new Node(1, false));
+        q.offer(new Node(N, true));
 
         while(!q.isEmpty()){
-            int cur = q.poll();
+            Node cur = q.poll();
+            int v = cur.v;
+            boolean f = cur.f;
 
-            for(int v : graph[cur]){
-                if(visited[v]) continue;
-                if(v==e) return true;    
-                else{
-                    visited[v] = true;
-                    q.offer(v);
+            if(f){
+                for(int u : regraph[v]){
+                    if(!visited[1][u]){
+                        visited[1][u] = true;
+                        q.offer(new Node(u, true));
+                    }
+                }
+            }else{
+                for(int u : graph[v]){
+                    if(!visited[0][u]){
+                        visited[0][u] = true;
+                        q.offer(new Node(u, false));
+                    }
                 }
             }
         }
-        return false;
     }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
         graph = new ArrayList[N+1];
-        for(int i=1; i<=N; i++) graph[i] = new ArrayList<>();
+        regraph = new ArrayList[N+1];
+        visited = new boolean[2][N+1];
+
+        for(int i=1; i<=N; i++){
+            graph[i] = new ArrayList<>();
+            regraph[i] = new ArrayList<>();
+        }
 
         for(int i=0; i<M; i++){
             st = new StringTokenizer(br.readLine());
@@ -43,19 +70,17 @@ public class Q14615 {
             int Y = Integer.parseInt(st.nextToken());
 
             graph[X].add(Y);
+            regraph[Y].add(X);
         }
 
         StringBuilder sb = new StringBuilder();
 
+        bfs();
+
         int T = Integer.parseInt(br.readLine());
         for(int i=0; i<T; i++){
-            int C = Integer.parseInt(br.readLine());
-            visited = new boolean[N+1];
-            boolean result1 = bfs(1, C);
-            visited = new boolean[N+1];
-            boolean result2 = bfs(C, N);
-            
-            sb.append(result1&&result2 ? "Defend the CTP" : "Destroyed the CTP").append("\n");
+            C = Integer.parseInt(br.readLine());    
+            sb.append(visited[0][C]&&visited[1][C] ? "Defend the CTP" : "Destroyed the CTP").append("\n");
         }
 
         System.out.println(sb);
