@@ -1,4 +1,4 @@
-package DFS;
+package BFS;
 
 import java.io.*;
 import java.util.*;
@@ -8,20 +8,24 @@ public class Q14615 {
     static boolean[] visited;
     static int result;
 
-    static void dfs(int s, int e){
+    static int bfs(int s, int e){
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(s);
         visited[s] = true;
 
-        for(int v : graph[s]){
-            if(!visited[v]){
-                if(v==e){
-                    result++;
-                    break;
+        while(!q.isEmpty()){
+            int cur = q.poll();
+
+            for(int v : graph[cur]){
+                if(visited[v]) continue;
+                if(v==e) return 1;    
+                else{
+                    visited[v] = true;
+                    q.offer(v);
                 }
-                else dfs(v,e);
             }
         }
-        
-        return;
+        return -1;
     }
 
     public static void main(String[] args) throws IOException {
@@ -47,13 +51,12 @@ public class Q14615 {
         int T = Integer.parseInt(br.readLine());
         for(int i=0; i<T; i++){
             int C = Integer.parseInt(br.readLine());
-            result = -1;
             visited = new boolean[N+1];
-            dfs(1, C);
+            int result1 = bfs(1, C);
             visited = new boolean[N+1];
-            dfs(C, N);
+            int result2 = bfs(C, N);
             
-            sb.append(result<=0 ? "Destroyed the CTP" : "Defend the CTP").append("\n");
+            sb.append((result1+result2)<=0 ? "Destroyed the CTP" : "Defend the CTP").append("\n");
         }
 
         System.out.println(sb);
