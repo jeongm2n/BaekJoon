@@ -30,7 +30,7 @@ public class Q26170 {
 
 		bt = Integer.MAX_VALUE;
 		visited[r][c] = true;
-		dfs(r, c, 0, 0);
+		dfs(c, r, 0, 0);
 
 		if (bt == Integer.MAX_VALUE) {
 			System.out.println(-1);
@@ -39,7 +39,7 @@ public class Q26170 {
 		}
 	}
 
-	private static void dfs(int r, int c, int cnt, int d) {
+	private static void dfs(int c, int r, int cnt, int d) {
 		if (cnt==3) {
 			bt = Math.min(bt, d);
 			return;
