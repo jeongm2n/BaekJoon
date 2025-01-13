@@ -11,14 +11,6 @@ public class Q30024 {
     static PriorityQueue<Node> pq = new PriorityQueue<>((o1,o2)->{return o2.v-o1.v;});
     static StringBuilder sb = new StringBuilder();
 
-    static class Answer{
-        int x, y;
-        public Answer(int x, int y){
-            this.x = x;
-            this.y = y;
-        }
-    }
-
     static class Node{
         int x, y, v;
         public Node(int x, int y, int v){
