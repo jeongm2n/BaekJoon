@@ -1,4 +1,4 @@
-package BFS;
+package MST.Kruskal;
 
 import java.io.*;
 import java.util.*;
