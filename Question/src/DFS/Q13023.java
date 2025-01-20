@@ -47,7 +47,8 @@ public class Q13023 {
         }
 
         for(int i=0; i<N; i++){
-            if(result!=1) dfs(i,0);
+            if(result==0) dfs(i,0);
+            else break;
         }
 
         System.out.println(result);
