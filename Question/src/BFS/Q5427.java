@@ -43,15 +43,15 @@ public class Q5427 {
 
             for(int i=0; i<size; i++){
                 Node cur = person.poll();
-                
-                if(!isRange(cur.x, cur.y)){
-                    answer = cur.t;
-                    break;
-                }
 
                 for(int j=0; j<4; j++){
                     int nx = cur.x + dx[j];
                     int ny = cur.y + dy[j];
+
+                    if(!isRange(nx, ny)){
+                        answer = cur.t+1;
+                        break;
+                    }
 
                     if(graph[ny][nx]=='.'){
                         person.offer(new Node(nx, ny, cur.t+1));
