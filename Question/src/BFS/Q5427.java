@@ -20,8 +20,6 @@ public class Q5427 {
     }
 
     static int bfs(){
-        int answer = 0;
-
         while(!person.isEmpty()){
             int size = fire.size();
 
@@ -49,8 +47,7 @@ public class Q5427 {
                     int ny = cur.y + dy[j];
 
                     if(!isRange(nx, ny)){
-                        answer = cur.t+1;
-                        break;
+                        return cur.t+1;
                     }
 
                     if(graph[ny][nx]=='.'){
@@ -61,7 +58,7 @@ public class Q5427 {
             }
         }
         
-        return answer;
+        return -1;
     }
 
     static boolean isRange(int x, int y){
@@ -81,7 +78,8 @@ public class Q5427 {
             N = Integer.parseInt(st.nextToken());
     
             graph = new char[N][M];
-            person = fire = new LinkedList<>();
+            person = new LinkedList<>();
+            fire = new LinkedList<>();
 
             for(int i=0; i<N; i++){
                 String str = br.readLine();
@@ -95,7 +93,7 @@ public class Q5427 {
 
             int result = bfs();
 
-            sb.append(result==0 ? "IMPOSSIBLE" : result).append("\n");
+            sb.append(result==-1 ? "IMPOSSIBLE" : result).append("\n");
         }
 
         System.out.println(sb);
