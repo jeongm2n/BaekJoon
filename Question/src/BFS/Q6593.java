@@ -1,8 +1,6 @@
 package BFS;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Q6593 {
@@ -22,7 +20,7 @@ public class Q6593 {
     static char[][][] graph;
     static boolean[][][] visited;
     static int L, R, C;
-    static Queue<Node> q = new LinkedList<>();
+    static Queue<Node> q;
 
     static int bfs(){
         while(!q.isEmpty()){
@@ -50,8 +48,7 @@ public class Q6593 {
     }
 
     static boolean range(int z, int x, int y){
-        if(z>=0 && x>=0 && y>=0 && z<L && x<C && y<R) return true;
-        return false;
+        return z>=0 && x>=0 && y>=0 && z<L && x<C && y<R;
     }
 
     public static void main(String[] args) throws IOException {
@@ -60,6 +57,7 @@ public class Q6593 {
         StringBuilder sb = new StringBuilder();
 
         while(true){
+            q = new LinkedList<>();
             st = new StringTokenizer(br.readLine());
             L = Integer.parseInt(st.nextToken());
             R = Integer.parseInt(st.nextToken());
