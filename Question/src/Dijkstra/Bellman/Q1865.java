@@ -78,7 +78,7 @@ public class Q1865 {
                 int v = Integer.parseInt(st.nextToken());
                 int w = Integer.parseInt(st.nextToken());
 
-                graph[u].add(new Road(v, w));
+                graph[u].add(new Road(v, -1 * w));
             }
 
             boolean isCycle = false;
